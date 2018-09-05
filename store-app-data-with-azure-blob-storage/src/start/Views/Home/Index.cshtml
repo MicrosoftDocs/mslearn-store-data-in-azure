@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Client side libs required  -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.css" crossorigin="anonymous">
+
+<style>
+    html {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    main {
+        margin: 20px;
+    }
+
+    #gallery-note {
+        font-size: smaller
+    }
+
+    .dropzone {
+        border: 3px dashed #00a1f1;
+        background: #F0F8FF;
+        margin: 25px;
+        border-radius: 5px;
+        max-width: 400px;
+    }
+
+    .dropzone .dz-message {
+        font-weight: 350;
+    }
+
+    .dropzone .dz-message .note {
+        font-family: sans-serif;
+        font-size: 18px;
+        font-weight: 200;
+        display: block;
+        margin-top 1.5rem;
+    }
+</style>
+
+
+<main>
+    <div class="box header">
+        <h1><span id="page-title">File Uploader</span></h1>
+    </div>
+    
+    <div class="box content">
+        <hr>
+        <h2>Upload files</h2>
+        <div>
+            <form action="/api/Files"
+                 class="dropzone needsclick dz-clickable" 
+                 id="file-upload"
+                 method="post"
+                 enctype="multipart/form">
+
+                <div class="dz-message needsclick">
+                    <span class="note needsclick">
+                        Drop files here or click to upload.
+                    </span>
+                </div>
+            </form>
+        </div>
+        <h2>Uploaded files</h2>
+            <ul id="fileList"></ul>
+        </div>
+    </div>
+</main>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
+
+<script>
+
+    // Grab links for files from backend api
+    function fetchLinks() {
+        // Fetch links
+        $.get("api/Files", function(fetchedLinks) {
+
+            var newList = $('<ul id="fileList" />')
+
+            $.each(fetchedLinks, function(index, value) {
+                var li = $('<li/>').appendTo(fileList)
+                $('<a/>').attr('href', value).text(value.split('/').pop()).appendTo(li)
+                newList.append(li)
+            })
+
+            $('#fileList').replaceWith(newList)
+        });
+    }
+
+    // Start first interval
+    fetchLinks()
+    
+    setInterval(function() {
+        fetchLinks()
+    }, 5000) 
+
+    /* Dropzone */
+    // "fileUpload" is the camelized version of the HTML element's ID
+    Dropzone.options.fileUpload = {
+        paramName: "file", // The name that will be used to transfer the file
+        dictDefaultMessage: "Drop files here or click to upload",
+        addRemoveLinks: true, // Allows for cancellation of file upload and remove thumbnail
+        init: function() {
+            myDropzone = this;
+            myDropzone.on("success", function(file, response) {
+                console.log("Success");
+                myDropzone.removeFile(file);
+                fetchLinks();
+            });                    
+        }
+    };
+</script>
