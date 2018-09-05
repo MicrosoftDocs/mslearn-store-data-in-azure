@@ -1,3 +1,13 @@
+# Microsoft Learn: Store data in Azure
+
+Azure provides a variety of ways to store data: unstructured, archival, relational and more. Learn the basics of storage management in Azure, how to create a Storage Account, and how to choose the right model for the data you want to store in the cloud.
+
+This project contains the source code for the **Store data in Azure** Learning Path.
+
+## Modules
+Each folder represents a _module_ in the learning path that you can explore.
+
+**store-app-data-with-azure-blob-storage** contains the source code for the **Store web application data with Azure Blob storage** module.
 
 # Contributing
 
