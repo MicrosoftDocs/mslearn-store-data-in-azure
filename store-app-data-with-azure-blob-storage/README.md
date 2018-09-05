@@ -5,7 +5,7 @@ Learn how to build a web app that stores user files with Azure Blob storage.
 - Create storage resources to hold blobs.
 - Store and retrieve data from Azure Blob Storage.
 
-This project contains the source code for the **Store application data with Azure Blob Storage** learning module. 
+This project contains the source code for the [Store web application data with Azure Blob storage](https://docs.microsoft.com/learn/modules/store-app-data-with-azure-blob-storage/) learning module.
 
 The **src/start/** folder contains the starting project and the **src/final/** folder has a completed version of the project.
 
