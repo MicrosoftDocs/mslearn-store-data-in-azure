@@ -7,6 +7,6 @@ Learn how to build a web app that stores user files with Azure Blob storage.
 
 This project contains the source code for the **Store application data with Azure Blob Storage** learning module. 
 
-The **src/start/** folder contains the starting project.
+The **src/start/** folder contains the starting project and the **src/final/** folder has a completed version of the project.
 
 We recommend copying the starting project to a new location to work on the code.
