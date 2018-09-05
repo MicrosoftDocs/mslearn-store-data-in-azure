@@ -7,7 +7,9 @@ This project contains the source code for the [Store data in Azure](https://docs
 ## Modules
 Each folder represents a _module_ in the learning path that you can explore.
 
-[store-app-data-with-azure-blob-storage](https://github.com/MicrosoftDocs/mslearn-store-data-in-azure/tree/master/store-app-data-with-azure-blob-storage) contains the source code for the [Store web application data with Azure Blob storage](https://docs.microsoft.com/learn/modules/store-app-data-with-azure-blob-storage/) module.
+| Folder | Module |
+|--------|--------|
+| [store-app-data-with-azure-blob-storage](https://github.com/MicrosoftDocs/mslearn-store-data-in-azure/tree/master/store-app-data-with-azure-blob-storage) | Contains the source code for the [Store web application data with Azure Blob storage](https://docs.microsoft.com/learn/modules/store-app-data-with-azure-blob-storage/) module. |
 
 # Contributing
 
