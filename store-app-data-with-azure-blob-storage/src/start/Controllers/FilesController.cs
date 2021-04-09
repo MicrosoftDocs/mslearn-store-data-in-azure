@@ -37,7 +37,7 @@ namespace FileUploader.Controllers
 
             var urls = names.Select(n => $"{baseUrl}/{n}");
 
-            return Ok(urls);            
+            return Ok(urls);
         }
 
         // POST /api/Files
@@ -60,7 +60,7 @@ namespace FileUploader.Controllers
             {
                 await storage.Save(stream, name);
             }
-            
+
             return Accepted();
         }
 
