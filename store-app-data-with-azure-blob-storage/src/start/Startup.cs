@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using FileUploader.Models;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;
 
 namespace FileUploader
 {
@@ -29,10 +30,11 @@ namespace FileUploader
                 return blobStorage;
             });
 
-            services.AddMvc();
+            services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -45,11 +47,12 @@ namespace FileUploader
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+
+            app.UseEndpoints(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapDefaultControllerRoute();
+                routes.MapControllers();
             });
         }
     }
