@@ -62,6 +62,12 @@ public class BlobStorage implements Storage {
 
     @Override
     public InputStream read(String fileName) {
-        throw new UnsupportedOperationException();
+        AzureStorageResourcePatternResolver storageResourcePatternResolver = new AzureStorageResourcePatternResolver(blobServiceClient);
+        Resource resource = storageResourcePatternResolver.getResource(RESOURCE_SEARCH_PATTERN_PREFIX + fileName);
+        try {
+            return resource.getInputStream();
+        } catch (IOException exception) {
+            throw new UncheckedIOException(exception);
+        }
     }
 }
