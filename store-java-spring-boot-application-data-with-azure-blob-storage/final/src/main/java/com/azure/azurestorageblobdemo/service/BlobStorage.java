@@ -3,7 +3,6 @@ package com.azure.azurestorageblobdemo.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UncheckedIOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -37,37 +36,27 @@ public class BlobStorage implements Storage {
     }
 
     @Override
-    public List<String> listFiles() {
+    public List<String> listFiles() throws IOException {
         AzureStorageResourcePatternResolver storageResourcePatternResolver = new AzureStorageResourcePatternResolver(blobServiceClient);
-        try {
-            Resource[] resources = storageResourcePatternResolver.getResources(RESOURCE_SEARCH_PATTERN_PREFIX + "*");
-            return Stream.of(resources)
-                .map(Resource::getFilename)
-                .collect(Collectors.toList());
-        } catch (IOException exception) {
-            throw new UncheckedIOException(exception);
-        }
+        Resource[] resources = storageResourcePatternResolver.getResources(RESOURCE_SEARCH_PATTERN_PREFIX + "*");
+        return Stream.of(resources)
+            .map(Resource::getFilename)
+            .collect(Collectors.toList());
     }
 
     @Override
-    public void save(String fileName, InputStream fileInputStream) {
+    public void save(String fileName, InputStream fileInputStream) throws IOException {
         AzureStorageResourcePatternResolver storageResourcePatternResolver = new AzureStorageResourcePatternResolver(blobServiceClient);
         WritableResource resource = (WritableResource) storageResourcePatternResolver.getResource(RESOURCE_SEARCH_PATTERN_PREFIX + fileName);
         try (OutputStream outputStream = resource.getOutputStream()) {
             StreamUtils.copy(fileInputStream, outputStream);
-        } catch (IOException exception) {
-            throw new UncheckedIOException(exception);
         }
     }
 
     @Override
-    public InputStream read(String fileName) {
+    public InputStream read(String fileName) throws IOException {
         AzureStorageResourcePatternResolver storageResourcePatternResolver = new AzureStorageResourcePatternResolver(blobServiceClient);
         Resource resource = storageResourcePatternResolver.getResource(RESOURCE_SEARCH_PATTERN_PREFIX + fileName);
-        try {
-            return resource.getInputStream();
-        } catch (IOException exception) {
-            throw new UncheckedIOException(exception);
-        }
+        return resource.getInputStream();
     }
 }

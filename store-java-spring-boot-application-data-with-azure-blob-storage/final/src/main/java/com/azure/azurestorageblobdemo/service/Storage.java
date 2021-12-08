@@ -1,13 +1,14 @@
 package com.azure.azurestorageblobdemo.service;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
 public interface Storage {
 
-    List<String> listFiles();
+    List<String> listFiles() throws IOException;
 
-    void save(String fileName, InputStream fileInputStream);
+    void save(String fileName, InputStream fileInputStream) throws IOException;
 
-    InputStream read(String fileName);
+    InputStream read(String fileName) throws IOException;
 }

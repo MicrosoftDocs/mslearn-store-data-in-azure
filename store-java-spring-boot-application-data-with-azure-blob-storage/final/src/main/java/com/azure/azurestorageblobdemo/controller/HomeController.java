@@ -1,5 +1,6 @@
 package com.azure.azurestorageblobdemo.controller;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import com.azure.azurestorageblobdemo.service.Storage;
@@ -32,7 +33,12 @@ public class HomeController {
     
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("files", storage.listFiles());
+        try {
+            model.addAttribute("files", storage.listFiles());
+        } catch (IOException exception) {
+            LOGGER.error("Unable to load file list", exception);
+            model.addAttribute("message", "File list could not be loaded.");
+        }
         return "index";
     }
 
@@ -48,7 +54,7 @@ public class HomeController {
         String fileName = file.getOriginalFilename();
         try (InputStream fileInputStream = file.getInputStream()) {
             storage.save(fileName, fileInputStream);
-        } catch (Exception exception) {
+        } catch (IOException exception) {
             LOGGER.error("Upload failed", exception);
             attributes.addFlashAttribute("message", "Upload failed");
             return "redirect:/";

@@ -2,7 +2,6 @@ package com.azure.azurestorageblobdemo.service;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -25,12 +24,8 @@ public class LocalStorage implements Storage {
     private Path baseDir;
 
     @PostConstruct
-    private void init() {
-        try {
-            baseDir = Files.createTempDirectory("tmpStorage");
-        } catch (IOException exception) {
-            throw new IllegalStateException("Can't work without local directory", exception);
-        }
+    private void init() throws IOException {
+        baseDir = Files.createTempDirectory("tmpStorage");
     }
 
     @PreDestroy
@@ -43,35 +38,23 @@ public class LocalStorage implements Storage {
     }
 
     @Override
-    public List<String> listFiles() {
-        try {
-            return Files.list(baseDir)
-                .filter(Files::isRegularFile)
-                .map(path -> path.toFile().getName())
-                .collect(Collectors.toList());
-        } catch (IOException exception) {
-            throw new UncheckedIOException(exception);
-        }
+    public List<String> listFiles() throws IOException {
+        return Files.list(baseDir)
+            .filter(Files::isRegularFile)
+            .map(path -> path.toFile().getName())
+            .collect(Collectors.toList());
     }
 
     @Override
-    public void save(String fileName, InputStream fileInputStream) {
+    public void save(String fileName, InputStream fileInputStream) throws IOException {
         Path localPath = baseDir.resolve(fileName);
-        try {
-            Files.copy(fileInputStream, localPath, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException exception) {
-            throw new UncheckedIOException(exception);
-        }
+        Files.copy(fileInputStream, localPath, StandardCopyOption.REPLACE_EXISTING);
     }
 
     @Override
-    public InputStream read(String fileName) {
+    public InputStream read(String fileName) throws IOException {
         Path localPath = baseDir.resolve(fileName);
-        try {
-            return Files.newInputStream(localPath);
-        } catch (IOException exception) {
-            throw new UncheckedIOException(exception);
-        }
+        return Files.newInputStream(localPath);
     }
     
 }
