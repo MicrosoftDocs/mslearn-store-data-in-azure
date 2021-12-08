@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>FileUploader</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div>
+        <h1><span id="page-title">File Uploader</span></h1>
+    </div>
+    
+    <div>
+        <hr>
+        <h2>Upload files</h2>
+        <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
+        <div>
+            <form method="post" th:action="@{/files}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="file" name="file" class="form-control-file">
+                </div>
+                <button type="submit" class="btn btn-primary">Upload File</button>
+            </form>
+        </div>
+        <h2>Uploaded files</h2>
+        <ul th:each="file: ${files}">
+            <li><a th:href="@{'/files/' + ${file}}" th:text="${file}"/></li>
+        </ul>
+    </div>
+</body>
+</html>
