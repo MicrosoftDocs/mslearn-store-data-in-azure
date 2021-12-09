@@ -28,7 +28,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.azure.spring</groupId>
-			<artifactId>azure-spring-boot-starter-storage</artifactId>
+			<artifactId>spring-cloud-azure-starter-storage-blob</artifactId>
 		</dependency>
 
 		<dependency>
@@ -47,8 +47,8 @@
 		<dependencies>
 			<dependency>
 				<groupId>com.azure.spring</groupId>
-				<artifactId>azure-spring-boot-bom</artifactId>
-				<version>${azure.version}</version>
+				<artifactId>spring-cloud-azure-dependencies</artifactId>
+				<version>4.0.0-beta.2</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
