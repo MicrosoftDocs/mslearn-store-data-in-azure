@@ -21,6 +21,7 @@ import org.apache.commons.io.IOUtils;
 @RequestScoped
 public class IndexBean {
 
+    @Named("BlobStorage")
     @Inject
     private Storage storage;
 
