@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface Storage {
 
-    List<String> listFiles();
+    List<String> listNames();
 
-    void save(String fileName, InputStream fileInputStream);
+    void save(String name, InputStream inputStream);
 
-    InputStream read(String fileName);
+    InputStream read(String name);
 }

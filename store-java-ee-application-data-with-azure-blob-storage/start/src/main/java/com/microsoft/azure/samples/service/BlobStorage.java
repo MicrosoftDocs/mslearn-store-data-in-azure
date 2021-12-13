@@ -14,15 +14,15 @@ public class BlobStorage implements Storage {
         throw new UnsupportedOperationException();
     }
 
-    public List<String> listFiles() {
+    public List<String> listNames() {
         throw new UnsupportedOperationException();
     }
 
-    public void save(String fileName, InputStream fileInputStream) {
+    public void save(String name, InputStream inputStream) {
         throw new UnsupportedOperationException();
     }
 
-    public InputStream read(String fileName) {
+    public InputStream read(String name) {
         throw new UnsupportedOperationException();
     }
     

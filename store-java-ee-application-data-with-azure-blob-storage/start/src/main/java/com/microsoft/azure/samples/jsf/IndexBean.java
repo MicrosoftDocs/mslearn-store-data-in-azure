@@ -50,7 +50,7 @@ public class IndexBean {
     }
 
     public List<String> listFileNames() {
-        return storage.listFiles();
+        return storage.listNames();
     }
 
     public Part getUploadedFile() {

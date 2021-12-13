@@ -15,36 +15,36 @@ import com.azure.storage.blob.options.BlobParallelUploadOptions;
 
 @Singleton
 public class BlobStorage implements Storage {
-    private static final String CONTAINER_NAME = "fileuploader";
 
     private BlobContainerClient blobContainerClient;
 
     @PostConstruct
     private void init() {
         String connectionString = System.getenv("STORAGE_CONNECTION_STRING");
+        String containerName = System.getenv("STORAGE_CONTAINER_NAME");
         BlobServiceClient blobServiceClient = new BlobServiceClientBuilder()
             .connectionString(connectionString)
             .buildClient();
-        blobContainerClient = blobServiceClient.getBlobContainerClient(CONTAINER_NAME);
+        blobContainerClient = blobServiceClient.getBlobContainerClient(containerName);
         if (!blobContainerClient.exists()) {
             blobContainerClient.create();
         }
     }
 
-    public List<String> listFiles() {
+    public List<String> listNames() {
         return blobContainerClient.listBlobs()
           .stream()
           .map(BlobItem::getName)
           .collect(Collectors.toList());
     }
 
-    public void save(String fileName, InputStream fileInputStream) {
-        blobContainerClient.getBlobClient(fileName)
-            .uploadWithResponse(new BlobParallelUploadOptions(fileInputStream), null, null);
+    public void save(String name, InputStream inputStream) {
+        blobContainerClient.getBlobClient(name)
+            .uploadWithResponse(new BlobParallelUploadOptions(inputStream), null, null);
     }
 
-    public InputStream read(String fileName) {
-        return blobContainerClient.getBlobClient(fileName)
+    public InputStream read(String name) {
+        return blobContainerClient.getBlobClient(name)
             .openInputStream();
     }
     
