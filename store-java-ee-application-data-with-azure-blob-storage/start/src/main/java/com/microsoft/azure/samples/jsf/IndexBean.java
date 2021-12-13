@@ -13,7 +13,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.microsoft.azure.samples.service.Storage;
+import com.microsoft.azure.samples.service.BlobStorage;
 
 import org.apache.commons.io.IOUtils;
 
@@ -22,7 +22,7 @@ import org.apache.commons.io.IOUtils;
 public class IndexBean {
 
     @Inject
-    private Storage storage;
+    private BlobStorage storage;
 
     private Part uploadedFile;
 
@@ -49,7 +49,7 @@ public class IndexBean {
         }
     }
 
-    public List<String> listFileNames() throws IOException {
+    public List<String> listFileNames() {
         return storage.listFiles();
     }
 

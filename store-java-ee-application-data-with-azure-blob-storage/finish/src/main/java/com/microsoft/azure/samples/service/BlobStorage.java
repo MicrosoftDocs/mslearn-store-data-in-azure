@@ -1,56 +1,53 @@
 package com.microsoft.azure.samples.service;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.BlobServiceClient;
+import com.azure.storage.blob.BlobServiceClientBuilder;
 import com.azure.storage.blob.models.BlobItem;
 import com.azure.storage.blob.options.BlobParallelUploadOptions;
 
-@Named("BlobStorage")
 @Singleton
-public class BlobStorage implements Storage {
+public class BlobStorage {
     private static final String CONTAINER_NAME = "fileuploader";
 
-    @Inject
-    private BlobServiceClient blobServiceClient;
+    private BlobContainerClient blobContainerClient;
 
     @PostConstruct
     private void init() {
-        BlobContainerClient blobContainerClient = blobServiceClient.getBlobContainerClient(CONTAINER_NAME);
+        String connectionString = System.getenv("STORAGE_CONNECTION_STRING");
+        if (connectionString == null) {
+            throw new IllegalArgumentException("STORAGE_CONNECTION_STRING environment variable is not defined");
+        }
+        BlobServiceClient blobServiceClient = new BlobServiceClientBuilder()
+            .connectionString(connectionString)
+            .buildClient();
+        blobContainerClient = blobServiceClient.getBlobContainerClient(CONTAINER_NAME);
         if (!blobContainerClient.exists()) {
             blobContainerClient.create();
         }
     }
 
-    @Override
-    public List<String> listFiles() throws IOException {
-        return blobServiceClient.getBlobContainerClient(CONTAINER_NAME)
-          .listBlobs()
+    public List<String> listFiles() {
+        return blobContainerClient.listBlobs()
           .stream()
           .map(BlobItem::getName)
           .collect(Collectors.toList());
     }
 
-    @Override
-    public void save(String fileName, InputStream fileInputStream) throws IOException {
-        blobServiceClient.getBlobContainerClient(CONTAINER_NAME)
-            .getBlobClient(fileName)
+    public void save(String fileName, InputStream fileInputStream) {
+        blobContainerClient.getBlobClient(fileName)
             .uploadWithResponse(new BlobParallelUploadOptions(fileInputStream), null, null);
     }
 
-    @Override
-    public InputStream read(String fileName) throws IOException {
-        return blobServiceClient.getBlobContainerClient(CONTAINER_NAME)
-            .getBlobClient(fileName)
+    public InputStream read(String fileName) {
+        return blobContainerClient.getBlobClient(fileName)
             .openInputStream();
     }
     
