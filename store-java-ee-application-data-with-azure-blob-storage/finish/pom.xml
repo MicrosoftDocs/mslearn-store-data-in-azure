@@ -48,33 +48,5 @@
   </dependencyManagement>
   <build>
     <finalName>ROOT</finalName>
-    <plugins>
-      <plugin>
-        <groupId>com.microsoft.azure</groupId>  
-        <artifactId>azure-webapp-maven-plugin</artifactId>  
-        <version>2.2.0</version>  
-        <configuration>
-          <subscriptionId>your_subscription_id</subscriptionId>
-          <resourceGroup>your_resource_group</resourceGroup>
-          <appName>your_app_name</appName>
-          <region>westus2</region>
-          <runtime>
-            <os>Linux</os>      
-            <webContainer>JBossEAP 7</webContainer>
-          </runtime>
-          <deployment>
-            <resources>
-              <resource>
-                <type>war</type>
-                <directory>${project.basedir}/target</directory>
-                <includes>
-                  <include>*.war</include>
-                </includes>
-              </resource>
-            </resources>
-          </deployment>
-        </configuration>
-      </plugin>
-    </plugins>
   </build>
 </project>
