@@ -50,11 +50,6 @@
     <finalName>ROOT</finalName>
     <plugins>
       <plugin>
-        <groupId>org.wildfly.plugins</groupId>
-        <artifactId>wildfly-maven-plugin</artifactId>
-        <version>2.1.0.Final</version>
-      </plugin>
-      <plugin> 
         <groupId>com.microsoft.azure</groupId>  
         <artifactId>azure-webapp-maven-plugin</artifactId>  
         <version>2.2.0</version>  
