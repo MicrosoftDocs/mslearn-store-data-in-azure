@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 
+import com.azure.storage.blob.BlobClient;
 import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
@@ -39,13 +40,13 @@ public class BlobStorage implements Storage {
     }
 
     public void save(String name, InputStream inputStream) {
-        blobContainerClient.getBlobClient(name)
-            .uploadWithResponse(new BlobParallelUploadOptions(inputStream), null, null);
+        BlobClient blobClient = blobContainerClient.getBlobClient(name)
+        blobClient.uploadWithResponse(new BlobParallelUploadOptions(inputStream), null, null);
     }
 
     public InputStream read(String name) {
-        return blobContainerClient.getBlobClient(name)
-            .openInputStream();
+        BlobClient blobClient = blobContainerClient.getBlobClient(name)
+        return blobClient.openInputStream();
     }
     
 }
