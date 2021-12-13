@@ -22,9 +22,6 @@ public class BlobStorage {
     @PostConstruct
     private void init() {
         String connectionString = System.getenv("STORAGE_CONNECTION_STRING");
-        if (connectionString == null) {
-            throw new IllegalArgumentException("STORAGE_CONNECTION_STRING environment variable is not defined");
-        }
         BlobServiceClient blobServiceClient = new BlobServiceClientBuilder()
             .connectionString(connectionString)
             .buildClient();
