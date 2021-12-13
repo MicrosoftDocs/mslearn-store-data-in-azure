@@ -14,7 +14,7 @@ import com.azure.storage.blob.models.BlobItem;
 import com.azure.storage.blob.options.BlobParallelUploadOptions;
 
 @Singleton
-public class BlobStorage {
+public class BlobStorage implements Storage {
     private static final String CONTAINER_NAME = "fileuploader";
 
     private BlobContainerClient blobContainerClient;

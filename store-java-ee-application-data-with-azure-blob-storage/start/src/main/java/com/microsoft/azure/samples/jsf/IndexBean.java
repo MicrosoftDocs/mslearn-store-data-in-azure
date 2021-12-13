@@ -13,7 +13,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.microsoft.azure.samples.service.BlobStorage;
+import com.microsoft.azure.samples.service.Storage;
 
 import org.apache.commons.io.IOUtils;
 
@@ -22,7 +22,7 @@ import org.apache.commons.io.IOUtils;
 public class IndexBean {
 
     @Inject
-    private BlobStorage storage;
+    private Storage storage;
 
     private Part uploadedFile;
 

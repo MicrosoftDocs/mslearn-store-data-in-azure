@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 
 @Singleton
-public class BlobStorage {
+public class BlobStorage implements Storage {
 
     @PostConstruct
     private void init() {
