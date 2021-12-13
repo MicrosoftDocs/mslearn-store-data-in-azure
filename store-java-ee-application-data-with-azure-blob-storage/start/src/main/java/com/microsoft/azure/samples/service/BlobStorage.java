@@ -18,7 +18,7 @@ public class BlobStorage implements Storage {
         throw new UnsupportedOperationException();
     }
 
-    public void save(String name, InputStream inputStream) {
+    public void save(String name, InputStream inputStream, long contentLength) {
         throw new UnsupportedOperationException();
     }
 

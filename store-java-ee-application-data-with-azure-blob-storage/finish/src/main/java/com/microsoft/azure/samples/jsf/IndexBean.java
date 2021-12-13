@@ -44,7 +44,8 @@ public class IndexBean {
     public void upload() throws IOException {
         try (InputStream fileInputStream = uploadedFile.getInputStream()) {
             String fileName = uploadedFile.getSubmittedFileName();
-            storage.save(fileName, fileInputStream);
+            long contentLength = uploadedFile.getSize();
+            storage.save(fileName, fileInputStream, contentLength);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("File " + fileName + " has been uploaded!"));
         }
     }

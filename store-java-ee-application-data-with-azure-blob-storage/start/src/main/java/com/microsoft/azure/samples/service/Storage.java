@@ -7,7 +7,7 @@ public interface Storage {
 
     List<String> listNames();
 
-    void save(String name, InputStream inputStream);
+    void save(String name, InputStream inputStream, long contentLength);
 
     InputStream read(String name);
 }

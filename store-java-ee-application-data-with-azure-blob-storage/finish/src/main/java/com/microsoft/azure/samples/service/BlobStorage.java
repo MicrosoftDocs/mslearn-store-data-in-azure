@@ -12,7 +12,6 @@ import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
 import com.azure.storage.blob.models.BlobItem;
-import com.azure.storage.blob.options.BlobParallelUploadOptions;
 
 @Singleton
 public class BlobStorage implements Storage {
@@ -39,13 +38,13 @@ public class BlobStorage implements Storage {
           .collect(Collectors.toList());
     }
 
-    public void save(String name, InputStream inputStream) {
-        BlobClient blobClient = blobContainerClient.getBlobClient(name)
-        blobClient.uploadWithResponse(new BlobParallelUploadOptions(inputStream), null, null);
+    public void save(String name, InputStream inputStream, long contentLength) {
+        BlobClient blobClient = blobContainerClient.getBlobClient(name);
+        blobClient.upload(inputStream, contentLength);
     }
 
     public InputStream read(String name) {
-        BlobClient blobClient = blobContainerClient.getBlobClient(name)
+        BlobClient blobClient = blobContainerClient.getBlobClient(name);
         return blobClient.openInputStream();
     }
     
