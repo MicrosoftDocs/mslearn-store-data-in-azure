@@ -7,18 +7,18 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
   <properties>
-    <maven.compiler.source>8</maven.compiler.source>
-    <maven.compiler.target>8</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
     <failOnMissingWebXml>false</failOnMissingWebXml>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
   <dependencies>
-      <dependency>
-      <groupId>jakarta.platform</groupId>
-      <artifactId>jakarta.jakartaee-api</artifactId>
-      <version>8.0.0</version>
-      <scope>provided</scope>
+    <dependency>
+        <groupId>javax</groupId>
+        <artifactId>javaee-web-api</artifactId>
+        <version>8.0</version>
+        <scope>provided</scope>
     </dependency>
     <dependency>
         <groupId>org.glassfish</groupId>
@@ -39,8 +39,8 @@
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
         <version>2.11.0</version>
-      </dependency>
-    </dependencies>
+    </dependency>
+  </dependencies>
   <build>
     <finalName>ROOT</finalName>
   </build>
