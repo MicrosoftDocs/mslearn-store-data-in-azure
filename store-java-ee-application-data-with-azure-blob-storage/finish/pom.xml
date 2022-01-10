@@ -68,8 +68,8 @@
           <subscriptionId>${subscriptionId}</subscriptionId>
           <resourceGroup>${resourceGroup}</resourceGroup>
           <appName>${appName}</appName>
-          <pricingTier>F1</pricingTier>
-          <region>centralus</region>
+          <pricingTier>${pricingTier}</pricingTier>
+          <region>${region}</region>
           <runtime>
             <os>Linux</os>
             <javaVersion>Java 11</javaVersion>
