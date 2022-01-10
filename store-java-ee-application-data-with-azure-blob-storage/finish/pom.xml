@@ -65,11 +65,11 @@
         <version>2.3.0</version>
         <configuration>
           <schemaVersion>v2</schemaVersion>
-          <subscriptionId>${subscriptionId}</subscriptionId>
-          <resourceGroup>${resourceGroup}</resourceGroup>
-          <appName>${appName}</appName>
-          <pricingTier>${pricingTier}</pricingTier>
-          <region>${region}</region>
+          <subscriptionId>${env.AZ_SUBSCRIPTION_ID}</subscriptionId>
+          <resourceGroup>${env.AZ_RESOURCE_GROUP}</resourceGroup>
+          <appName>${env.AZ_APP_NAME}</appName>
+          <pricingTier>${env.AZ_PRICING_TIER}</pricingTier>
+          <region>${env.AZ_REGION}</region>
           <runtime>
             <os>Linux</os>
             <javaVersion>Java 11</javaVersion>
@@ -88,11 +88,11 @@
                 <appSettings>
                   <property>
                      <name>STORAGE_CONNECTION_STRING</name>
-                     <value>${storageConnectionString}</value>
+                     <value>${env.AZ_STORAGE_CONNECTION_STRING}</value>
                   </property>
                   <property>
                      <name>STORAGE_CONTAINER_NAME</name>
-                     <value>${storageContainerName}</value>
+                     <value>${env.AZ_STORAGE_CONTAINER_NAME}</value>
                   </property>
                </appSettings>
         </configuration>
