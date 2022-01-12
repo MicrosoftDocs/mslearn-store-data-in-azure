@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jstl/core">
+	
+    <h:head>
+        <title>File Uploader</title>
+    </h:head>
+    <h:body>
+    	<h2>File Uploader</h2>
+        <h:messages/>
+    	<h:form enctype="multipart/form-data">
+            <h:inputFile value="#{indexBean.uploadedFile}">
+                <f:ajax listener="#{indexBean.upload}" render="@all"/>
+            </h:inputFile>
+        </h:form>
+
+        <h2>Uploaded Files</h2>
+        <h:form>
+            <ul>
+                <c:forEach items="#{indexBean.listFileNames()}" var="item">
+                    <li>
+                        <h:commandLink action="#{indexBean.download(item)}">
+                            <h:outputText value="#{item}"/>
+                        </h:commandLink>
+                    </li>
+                </c:forEach>
+            </ul>
+        </h:form>
+    </h:body>
+</html>
